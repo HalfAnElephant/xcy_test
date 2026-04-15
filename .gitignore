@@ -21,5 +21,11 @@ dist/
 # Build artifacts
 build_logs/
 
+# macOS
+.DS_Store
+
+# Claude
+.claude/
+
 # Data (optional — remove if data.txt should be tracked)
 # data.txt
