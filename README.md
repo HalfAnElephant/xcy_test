@@ -11,25 +11,50 @@ C/C++ 编译、格式化与对拍测试工具。
 
 ### build — 格式化 + 编译
 
+#### 使用 Python 脚本
+
 ```bash
 python xcy_test.py build [target_dir]
 ```
 
+#### 使用可执行文件 (xcy_test.exe)
+
+```cmd
+xcy_test.exe build [target_dir]
+```
+
 可选参数：
 - `--config xcy.config.json` — 指定配置文件
-- `--format-ext .c .cpp` — 仅对指定后缀的文件进行格式化
+- `--format-ext .c .cpp .h` — 仅对指定后缀的文件进行格式化（默认使用配置文件中的 `extensions.format`）
 - `--no-color` — 关闭终端颜色输出
 
 示例：
 ```bash
+# 格式化并编译当前目录下所有源码
 python xcy_test.py build .
+xcy_test.exe build .
+
+# 仅格式化 .c 和 .cpp 文件（不处理 .h）
 python xcy_test.py build . --format-ext .c .cpp
+xcy_test.exe build . --format-ext .c .cpp
+
+# 仅格式化头文件
+python xcy_test.py build . --format-ext .h
+xcy_test.exe build . --format-ext .h
 ```
 
 ### test — 对拍测试
 
+#### 使用 Python 脚本
+
 ```bash
 python xcy_test.py test [target_dir]
+```
+
+#### 使用可执行文件 (xcy_test.exe)
+
+```cmd
+xcy_test.exe test [target_dir]
 ```
 
 可选参数：
@@ -39,6 +64,21 @@ python xcy_test.py test [target_dir]
 - `--git` — 使用 git unified diff 输出差异
 - `--detail` — 打印每组完整 stdout/stderr
 - `--compiler vs|gcc` — 选择对比编译器产物来源
+
+示例：
+```bash
+# 基础对拍
+python xcy_test.py test .
+xcy_test.exe test .
+
+# 使用 gcc 产物对拍，并显示详细输出
+python xcy_test.py test . --compiler gcc --detail
+xcy_test.exe test . --compiler gcc --detail
+
+# 使用 git diff 模式对比差异
+python xcy_test.py test . --git
+xcy_test.exe test . --git
+```
 
 ## 配置文件
 
